@@ -8,7 +8,7 @@ public:
     std::string getHiddenWord();
     void setFoundWord();
     std::string getFoundWord();
-    unsigned findLetter(char input);
+    bool findLetter(char input);
     
     Word(std::string input):hiddenWord(input)
     {

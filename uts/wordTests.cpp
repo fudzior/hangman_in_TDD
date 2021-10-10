@@ -2,22 +2,22 @@
 #include "gtest/gtest.h"
 
 
-TEST(wordTest, whenUserGaveBAndHiddenWordIsKasiaThenFoundWordIs_____AndFindLetterReturns1)
+TEST(wordTest, whenUserGaveBAndHiddenWordIsKasiaThenFoundWordIs_____AndFindLetterReturnsTrue)
 {
     Word word("kasia");
-    unsigned result = word.findLetter('b');
+    bool result = word.findLetter('b');
     std::string foundWord_ = word.getFoundWord();
     EXPECT_EQ(foundWord_, "_____");
-    EXPECT_EQ(result, 1);
+    EXPECT_EQ(result, false);
 }
 
-TEST(wordTest, whenUserGaveAAndHiddenWordIsKasiaThenFoundWordIs_a__aAndFindLetterReturns0)
+TEST(wordTest, whenUserGaveAAndHiddenWordIsKasiaThenFoundWordIs_a__aAndFindLetterReturnsFalse)
 {
     Word word("kasia");
-    unsigned result = word.findLetter('a');
+    bool result = word.findLetter('a');
     std::string foundWord_ = word.getFoundWord();
     EXPECT_EQ(foundWord_, "_a__a");
-    EXPECT_EQ(result, 0);
+    EXPECT_EQ(result, true);
 }
 
 TEST(wordTest, whenWordIsCreatedAndHiddenWordIsKasiaThenFoundWordIs_____)
