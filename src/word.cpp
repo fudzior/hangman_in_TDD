@@ -19,3 +19,21 @@ std::string Word::getFoundWord()
 {
     return foundWord;
 }
+
+unsigned Word::findLetter(char input)
+{
+    bool letterFound =false;
+    for (size_t i=0; i<hiddenWord.size(); ++i)
+    {
+        if (hiddenWord[i]==input)
+        {
+            foundWord[i]=input;
+            letterFound=true;
+        }
+    }
+
+    if (letterFound)
+        return 0;
+    else
+        return 1;
+}

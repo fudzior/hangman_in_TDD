@@ -13,13 +13,13 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-add_library(implementations src/word.cpp)
+add_library(implementations src/word.cpp src/game.cpp)
 target_include_directories(implementations PUBLIC include)
 
 add_executable(game src/main.cpp)
 target_link_libraries(game implementations)
 
-add_executable(tests uts/wordTests.cpp)
+add_executable(tests uts/wordTests.cpp uts/gameTests.cpp)
 target_link_libraries(tests gtest_main implementations)
 
 
