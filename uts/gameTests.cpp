@@ -11,6 +11,14 @@ class gameWithGosia: public ::testing::Test
 public:
     std::shared_ptr<Word> wordPtr = std::make_shared<Word>("Gosia");
 
+    std::istringstream iss;
+
+    void updateIss(std::string newValue)
+    {
+    iss.str("");
+    iss.clear();
+    iss.str(newValue);
+    }
 };
 
 
@@ -21,40 +29,131 @@ public:
 };
 
 
-/*TEST_F(gameWithGosia, whenUserGaveRychuthenGameStatusIsLoose)
+TEST_F(gameWithGosia, whenUserInputIsMalGosiaThenGameStateIsWon_UsingPlayGame)
 {
-    Game game(wordPtr);
-    std::istringstream iss("R y c h u");
-    char value = readIntFromStream(iss)
+    updateIss("MalGosia");
+    Game game(wordPtr); 
+    game.setInput(iss);
     game.playGame();
-    State result = game.getState();
-    EXPECT_EQ(result, loose);
-}*/
-
-TEST_F(gameWithGosia, checkingIfFakeInputIsWorking)
-{
-    std::istringstream iss("Gosia");
-    Game game(wordPtr);
-    std::string result = game.getInput(iss);
-    EXPECT_EQ(result, "Gosia");
-}
-
-TEST_F(gameWithGosia, whenUserGaveGosiathenGameStatusIsWon)
-{
-    Game game(wordPtr);
-    game.playRound('G');
-    game.playRound('o');
-    game.playRound('s');
-    game.playRound('i');
-    game.playRound('a');
     State result = game.getState();
     EXPECT_EQ(result, won);
 }
 
-TEST_F(gameWithA, whenUserGaveBAndHiddenWordIsANumberOfLifesDecreasesFrom5To4)
+TEST_F(gameWithGosia, whenUserInputIsRychuThenGameStateIsLoose_UsingPlayGame)
+{
+    updateIss("Rychu");
+    Game game(wordPtr); 
+    game.setInput(iss);
+    game.playGame();
+    State result = game.getState();
+    EXPECT_EQ(result, loose);
+}
+
+TEST_F(gameWithA, whenUserGaveAthenHeWons)
+{
+    std::istringstream iss("a");
+    Game game(wordPtr); 
+    game.setInput(iss);
+    game.playGame();
+    State result = game.getState();
+    EXPECT_EQ(result, won);
+}
+
+TEST_F(gameWithGosia, whenUserInputIsRychuThenGameStateIsLoose)
 {
     Game game(wordPtr);
-    game.playRound('b');
+    updateIss("R");
+    game.setInput(iss);
+    game.playRound();
+    updateIss("y");
+    game.setInput(iss);
+    game.playRound();
+    updateIss("c");
+    game.setInput(iss);
+    game.playRound();
+    updateIss("h");
+    game.setInput(iss);
+    game.playRound();
+    updateIss("u");
+    game.setInput(iss);
+    game.playRound();
+    State result = game.getState();
+    EXPECT_EQ(result, loose);
+    std::string userInput = wordPtr->getFoundWord();
+    EXPECT_EQ(userInput, "_____");
+}
+
+TEST_F(gameWithGosia, checkingIfUpdateIssMethodWork)
+{
+    Game game(wordPtr);
+    updateIss("G");
+    game.setInput(iss);
+    game.playRound();
+    updateIss("o");
+    game.setInput(iss);
+    game.playRound();
+    updateIss("s");
+    game.setInput(iss);
+    game.playRound();
+    updateIss("i");
+    game.setInput(iss);
+    game.playRound();
+    updateIss("a");
+    game.setInput(iss);
+    game.playRound();
+
+    std::string result = wordPtr->getFoundWord();
+    EXPECT_EQ(result, "Gosia");
+}
+
+TEST(checkInput, checkingIfMultipleFakeInputsWork)
+{
+    std::shared_ptr<Word> wordPtr = std::make_shared<Word>("Gosia");
+    Game game(wordPtr);
+    std::istringstream iss("G");
+    game.setInput(iss);
+    game.playRound();
+    iss.str("");
+    iss.clear();
+    iss.str("o");
+    game.setInput(iss);
+    game.playRound();
+    iss.str("");
+    iss.clear();
+    iss.str("s");
+    game.setInput(iss);
+    game.playRound();
+    iss.str("");
+    iss.clear();
+    iss.str("i");
+    game.setInput(iss);
+    game.playRound();
+    iss.str("");
+    iss.clear();
+    iss.str("a");
+    game.setInput(iss);
+    game.playRound();
+
+    std::string result = wordPtr->getFoundWord();
+    EXPECT_EQ(result, "Gosia");
+}
+
+TEST(checkInput, checkingIfFakeInputWork)
+{
+    std::istringstream iss("Gosia");
+    std::shared_ptr<Word> wordPtr = std::make_shared<Word>("Gosia");
+    Game game(wordPtr);
+    game.setInput(iss);
+    std::string result = game.getInput();
+    EXPECT_EQ(result, "Gosia");
+}
+
+TEST_F(gameWithA, whenUserGaveBAndHiddenWordIsANumberOfLifesDecreasesFrom5To4)
+{
+    std::istringstream iss("b");
+    Game game(wordPtr);
+    game.setInput(iss);
+    game.playRound();
     unsigned result = game.getNumberOfLifes();
     EXPECT_EQ(result, 4);
 }

@@ -36,9 +36,33 @@ State Game::getState()
     return gameState;
 }
 
-void Game::playRound(char input)
+void Game::setInput (std::istream& input)
 {
-    bool letterFound = wordPtr->findLetter(input);
+    std::string result ="";
+    input >> userInput;
+    inputIndex = 0;
+}
+
+std::string Game::getInput()
+{
+    return userInput;
+}
+
+void Game::playRound()
+{
+    char letter;
+    
+    if (inputIndex<userInput.size())
+    {
+        letter = userInput[inputIndex];
+        ++inputIndex;
+    }
+    else
+    {
+        setInput(std::cin);
+    }
+    
+    bool letterFound = wordPtr->findLetter(letter);
 
     if (!letterFound)
         --numberOfLifes;
@@ -46,9 +70,18 @@ void Game::playRound(char input)
     setState();
 }
 
-std::string Game::getInput (std::istream& input)
+void Game::playGame()
 {
-    std::string result ="";
-    input >> result;
-    return result;
+    while (gameState==on)
+    {
+        playRound();
+    }
+
+    if (gameState==won)
+        std::cout<<"You won!"<<std::endl;
+    else if (gameState==loose)
+    {
+        std::cout<<"You loose"<<std::endl;
+        std::cout<<"Hidden word was: "<<wordPtr->getHiddenWord()<<std::endl;
+    }
 }
