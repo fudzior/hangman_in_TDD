@@ -16,7 +16,7 @@ TEST(wordTest, whenUserGaveAAndHiddenWordIsKasiaThenFoundWordIs_a__aAndFindLette
     Word word("kasia");
     bool result = word.findLetter('a');
     std::string foundWord_ = word.getFoundWord();
-    EXPECT_EQ(foundWord_, "_a__a");
+    EXPECT_EQ(foundWord_, "_A__A");
     EXPECT_EQ(result, true);
 }
 
@@ -31,7 +31,7 @@ TEST(wordTest, whenGosiaIsSetHiddenWordWordThenReturnGosiaInGetHiddenWord)
 {
     Word word("gosia");
     std::string result = word.getHiddenWord();
-    EXPECT_EQ(result, "gosia");
+    EXPECT_EQ(result, "GOSIA");
 }
 
 TEST(wordTest, whenNothingIsSetHiddenWordWordThenReturnEmptyStringInGetHiddenWord)

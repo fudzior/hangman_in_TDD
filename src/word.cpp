@@ -1,6 +1,20 @@
 #include "word.hpp"
 
 #include <iostream>
+#include <cctype>
+
+void Word::setHiddenWord(std::string input)
+{
+    std::string result="";
+    char tempLetter;
+
+    for (auto letter : input)
+    {
+        tempLetter=std::toupper(letter);
+        result.push_back(tempLetter);
+    }
+    hiddenWord = result;
+}
 
 std::string Word::getHiddenWord()
 {
@@ -23,11 +37,13 @@ std::string Word::getFoundWord()
 bool Word::findLetter(char input)
 {
     bool letterFound =false;
+    char upperLetter = std::toupper(input);
+
     for (size_t i=0; i<hiddenWord.size(); ++i)
     {
-        if (hiddenWord[i]==input)
+        if (hiddenWord[i]==upperLetter)
         {
-            foundWord[i]=input;
+            foundWord[i]=upperLetter;
             letterFound=true;
         }
     }

@@ -29,6 +29,16 @@ public:
 };
 
 
+TEST_F(gameWithGosia, whenUserInputIsGOSIAThenGameStateIsWon)
+{
+    updateIss("GOSIA");
+    Game game(wordPtr); 
+    game.setInput(iss);
+    game.playGame();
+    State result = game.getState();
+    EXPECT_EQ(result, won);
+}
+
 TEST_F(gameWithGosia, whenUserInputIsMalGosiaThenGameStateIsWon_UsingPlayGame)
 {
     updateIss("MalGosia");
@@ -103,7 +113,7 @@ TEST_F(gameWithGosia, checkingIfUpdateIssMethodWork)
     game.playRound();
 
     std::string result = wordPtr->getFoundWord();
-    EXPECT_EQ(result, "Gosia");
+    EXPECT_EQ(result, "GOSIA");
 }
 
 TEST(checkInput, checkingIfMultipleFakeInputsWork)
@@ -135,17 +145,17 @@ TEST(checkInput, checkingIfMultipleFakeInputsWork)
     game.playRound();
 
     std::string result = wordPtr->getFoundWord();
-    EXPECT_EQ(result, "Gosia");
+    EXPECT_EQ(result, "GOSIA");
 }
 
 TEST(checkInput, checkingIfFakeInputWork)
 {
-    std::istringstream iss("Gosia");
+    std::istringstream iss("GOSIA");
     std::shared_ptr<Word> wordPtr = std::make_shared<Word>("Gosia");
     Game game(wordPtr);
     game.setInput(iss);
     std::string result = game.getInput();
-    EXPECT_EQ(result, "Gosia");
+    EXPECT_EQ(result, "GOSIA");
 }
 
 TEST_F(gameWithA, whenUserGaveBAndHiddenWordIsANumberOfLifesDecreasesFrom5To4)
@@ -192,5 +202,5 @@ TEST_F(gameWithA, checkIfPreparedPtrForWordIsWorking)
 {
     wordPtr->findLetter('a');
     std::string result = wordPtr->getFoundWord();
-    EXPECT_EQ(result, "a");
+    EXPECT_EQ(result, "A");
 }

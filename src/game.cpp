@@ -38,8 +38,10 @@ State Game::getState()
 
 void Game::setInput (std::istream& input)
 {
-    std::string result ="";
+    //CLASS WORD MANAGES UPPER AND LOWER CASE
+
     input >> userInput;
+
     inputIndex = 0;
 }
 
@@ -66,6 +68,9 @@ void Game::playRound()
 
     if (!letterFound)
         --numberOfLifes;
+
+    std::cout<<"Found word: "<< wordPtr->getFoundWord() <<std::endl;
+    std::cout<<"Number of lifes:"<< numberOfLifes << std::endl;
 
     setState();
 }

@@ -24,7 +24,11 @@ public:
     Game(std::shared_ptr<Word> wordPtr_):numberOfLifes(5),
                                         gameState(on),
                                         wordPtr(wordPtr_),
-                                        inputIndex(0){};
+                                        inputIndex(0)
+                                        {
+                                            std::cout<<"Found word: "<< wordPtr->getFoundWord() <<std::endl;
+                                            std::cout<<"Number of lifes:"<< numberOfLifes << std::endl;
+                                        };
 
 private:
     unsigned numberOfLifes;
