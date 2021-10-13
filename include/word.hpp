@@ -10,7 +10,7 @@ public:
     std::string getFoundWord();
     bool findLetter(char input);
     
-    Word(std::string input)
+    Word(const std::string& input)
     {
         setHiddenWord(input);
         setFoundWord();
@@ -19,5 +19,5 @@ public:
 private:
     std::string hiddenWord;
     std::string foundWord;
-    void setHiddenWord(std::string input);
+    void setHiddenWord(const std::string& input);
 };

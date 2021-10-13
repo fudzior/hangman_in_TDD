@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cctype>
 
-void Word::setHiddenWord(std::string input)
+void Word::setHiddenWord(const std::string& input)
 {
     std::string result="";
     char tempLetter;
