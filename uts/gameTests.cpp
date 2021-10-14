@@ -4,7 +4,6 @@
 
 #include <memory>
 #include <sstream>
-//#include <iostream>
 
 class gameWithGosia: public ::testing::Test
 {

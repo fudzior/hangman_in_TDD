@@ -1,5 +1,6 @@
 #include "word.hpp"
 #include "game.hpp"
+#include "generateTextFromFile.hpp"
 
 #include <iostream>
 #include <sstream>
@@ -10,6 +11,8 @@
 int main()
 {
     std::cout<<"From hangman main.cpp:"<<std::endl;
+
+    //generateTextFromFile();
 
     std::shared_ptr<Word> wordPtr = std::make_shared<Word>("Gosia");
 

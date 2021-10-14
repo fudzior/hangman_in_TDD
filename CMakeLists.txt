@@ -13,15 +13,34 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-add_library(implementations src/word.cpp src/game.cpp src/wordGenerator.cpp)
+SET(SRCS
+  src/word.cpp 
+  src/game.cpp 
+  src/wordGenerator.cpp 
+  src/generateTextFromFile.cpp
+)
+
+add_library(implementations ${SRCS})
 target_include_directories(implementations PUBLIC include)
 
 add_executable(game src/main.cpp)
 target_link_libraries(game implementations)
 
-add_executable(tests uts/wordTests.cpp uts/gameTests.cpp uts/wordGeneratorTests.cpp)
+SET(UTS
+  uts/wordTests.cpp 
+  uts/gameTests.cpp 
+  uts/wordGeneratorTests.cpp 
+  uts/generateTextFromFileTests.cpp
+)
+
+add_executable(tests ${UTS})
 target_link_libraries(tests gtest_main implementations)
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/textFiles/textForTests.txt
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/textFiles/textForTests.txt
+${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
 add_custom_target(run
                   COMMAND "./game")
