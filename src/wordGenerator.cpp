@@ -2,6 +2,24 @@
 
 #include <iostream>
 
+
+std::string WordGenerator::getLongWord(unsigned input)
+{
+    std::string word = "";
+
+    while (word.size()<input && nextWordIndex<inputText.size())
+    {
+        word = getWord();
+    }
+
+    if (word.size()<input)
+        return "";
+    else
+        return word;
+
+    return word;
+}
+
 std::string WordGenerator::getWord()
 {
     std::string word = "";

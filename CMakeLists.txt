@@ -42,6 +42,12 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/textFiles/textForTests.txt
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/textFiles/textForTests.txt
 ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/textFiles/animals.txt
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/textFiles/animals.txt
+${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+
 add_custom_target(run
                   COMMAND "./game")
 

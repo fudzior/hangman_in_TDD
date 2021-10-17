@@ -20,20 +20,21 @@ public:
 
     void playRound();
     void playGame();
-    
-    Game(std::shared_ptr<Word> wordPtr_):numberOfLifes(5),
+
+    Game(std::unique_ptr<Word> wordPtr_):numberOfLifes(5),
                                         gameState(on),
-                                        wordPtr(wordPtr_),
+                                        wordPtr(std::move(wordPtr_)),
                                         inputIndex(0)
                                         {
                                             std::cout<<"Found word: "<< wordPtr->getFoundWord() <<std::endl;
                                             std::cout<<"Number of lifes:"<< numberOfLifes << std::endl;
                                         };
-
+   
 private:
     unsigned numberOfLifes;
     State gameState;
-    std::shared_ptr<Word> wordPtr;
+    std::unique_ptr<Word> wordPtr;
     std::string userInput;
     size_t inputIndex;
+
 };

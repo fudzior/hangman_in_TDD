@@ -5,6 +5,7 @@ class WordGenerator
 {
 public:
     std::string getWord();
+    std::string getLongWord(unsigned input);
     unsigned getnextWordIndex();
     std::string getInputText();
 
