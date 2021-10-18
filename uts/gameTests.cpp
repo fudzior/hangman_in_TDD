@@ -69,7 +69,7 @@ TEST_F(gameWithA, whenUserGaveAthenHeWons)
     EXPECT_EQ(result, won);
 }
 
-/*TEST_F(gameWithGosia, whenUserInputIsRychuThenGameStateIsLoose)
+TEST_F(gameWithGosia, whenUserInputIsRychuThenGameStateIsLoose)
 {
     Game game(std::move(wordPtr));
     updateIss("R");
@@ -89,11 +89,9 @@ TEST_F(gameWithA, whenUserGaveAthenHeWons)
     game.playRound();
     State result = game.getState();
     EXPECT_EQ(result, loose);
-    std::string userInput = game.wordPtr->getFoundWord();
-    EXPECT_EQ(userInput, "_____");
-}*/
+}
 
-/*TEST_F(gameWithGosia, checkingIfUpdateIssMethodWork)
+TEST_F(gameWithGosia, checkingIfUpdateIssMethodWork)
 {
     Game game(std::move(wordPtr));
     updateIss("G");
@@ -112,11 +110,11 @@ TEST_F(gameWithA, whenUserGaveAthenHeWons)
     game.setInput(iss);
     game.playRound();
 
-    std::string result = game.wordPtr->getFoundWord();
-    EXPECT_EQ(result, "GOSIA");
-}*/
+    State result = game.getState();
+    EXPECT_EQ(result, won);
+}
 
-/*TEST(checkInput, checkingIfMultipleFakeInputsWork)
+TEST(checkInput, checkingIfMultipleFakeInputsWork)
 {
     std::unique_ptr<Word> wordPtr = std::make_unique<Word>("Gosia");
     Game game(std::move(wordPtr));
@@ -144,9 +142,9 @@ TEST_F(gameWithA, whenUserGaveAthenHeWons)
     game.setInput(iss);
     game.playRound();
 
-    std::string result = game.wordPtr->getFoundWord();
-    EXPECT_EQ(result, "GOSIA");
-}*/
+    State result = game.getState();
+    EXPECT_EQ(result, won);
+}
 
 TEST(checkInput, checkingIfFakeInputWork)
 {
@@ -168,28 +166,35 @@ TEST_F(gameWithA, whenUserGaveBAndHiddenWordIsANumberOfLifesDecreasesFrom5To4)
     EXPECT_EQ(result, 4);
 }
 
-/*TEST_F(gameWithA, whenHiddenWordIsAAndFoundWordIsAGameStateIsWon)
+TEST_F(gameWithA, whenHiddenWordIsAAndIUserGaveAGameStateIsWon)
 {
+    std::istringstream iss("a");
     Game game(std::move(wordPtr));
-    wordPtr->findLetter('a');
-    State result = game.setState();
+    game.setInput(iss);
+    game.playRound();
+    State result = game.getState();
     EXPECT_EQ(result, won);
-}*/
+}
 
-TEST_F(gameWithA, whenGameIsCreateDStateIsOn)
+TEST_F(gameWithA, whenGameIsCreatedStateIsOn)
 {
     Game game(std::move(wordPtr));
-    State result = game.setState();
+    State result = game.getState();
     EXPECT_EQ(result, on);
 }
 
-TEST_F(gameWithA, whenNumberOfLifesIs0ThenGameIsLoose)
+/*//since setState() and setNumberofLifes is private, this test is obsolete because it will behave like whenUserInputIsRychuThenGameStateIsLoose 
+TEST_F(gameWithA, whenNumberOfLifesIs0ThenGameIsLoose) 
 {
+    std::istringstream iss("b");
     Game game(std::move(wordPtr));
-    game.setNumberOfLifes(0);
-    State result = game.setState();
-    EXPECT_EQ(result, loose);
-}
+    game.setInput(iss);
+    game.playRound(); //need to play 5 rounds like in whenUserInputIsRychuThenGameStateIsLoose
+    unsigned result1 = game.getNumberOfLifes();
+    State result2 = game.getState();
+    EXPECT_EQ(result1, 0);
+    EXPECT_EQ(result2, loose);
+}*/
 
 TEST_F(gameWithA, whenGameIsStartedthenNumberOfLifeIs5)
 {

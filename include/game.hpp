@@ -10,15 +10,13 @@ class Game
 {
 public:
     unsigned getNumberOfLifes();
-    void setNumberOfLifes(unsigned input);
 
-    State setState();
     State getState();
 
     void setInput (std::istream& input);
     std::string getInput();
 
-    void playRound();
+    void playRound(); 
     void playGame();
 
     Game(std::unique_ptr<Word> wordPtr_):numberOfLifes(5),
@@ -36,5 +34,8 @@ private:
     std::unique_ptr<Word> wordPtr;
     std::string userInput;
     size_t inputIndex;
+
+    void setNumberOfLifes(unsigned input);
+    State setState();
 
 };

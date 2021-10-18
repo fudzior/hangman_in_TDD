@@ -6,7 +6,6 @@ class Word
 {
 public:
     std::string getHiddenWord();
-    void setFoundWord();
     std::string getFoundWord();
     bool findLetter(char input);
     
@@ -19,5 +18,7 @@ public:
 private:
     std::string hiddenWord;
     std::string foundWord;
+    
     void setHiddenWord(const std::string& input);
+    void setFoundWord();
 };
