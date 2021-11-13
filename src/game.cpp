@@ -57,6 +57,12 @@ void Game::playRound()
     if (inputIndex<userInput.size())
     {
         letter = userInput[inputIndex];
+
+        if (letter==27)
+        {
+            gameState=loose;
+            return;
+        }
         ++inputIndex;
     }
     else
@@ -71,7 +77,7 @@ void Game::playRound()
 
     std::cout<<"Found word: "<< wordPtr->getFoundWord() <<std::endl;
     std::cout<<"Number of lifes:"<< numberOfLifes << std::endl;
-
+    
     setState();
 }
 

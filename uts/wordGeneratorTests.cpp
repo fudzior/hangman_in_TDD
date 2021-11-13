@@ -2,6 +2,16 @@
 #include "gtest/gtest.h"
 
 
+
+TEST(wordGeneratorTest, whenInputTextIsKatarzyna__123_Rysio_MalgorzataThenFirstGeLongWordIsKatarzynaSecondGetLongWordIsMalgorzata)
+{
+    WordGenerator wordGenerator("!Katarzyna  123 Rysio Malgorzata");
+    std::string result1 = wordGenerator.getLongWord(6);
+    std::string result2 = wordGenerator.getLongWord(6);
+    EXPECT_EQ(result1, "Katarzyna");
+    EXPECT_EQ(result2, "Malgorzata");
+}
+
 TEST(wordGeneratorTest, whenInputTextIsKasia__123_GosiaThenGetLongWordWith6ReturnsEmptyString)
 {
     WordGenerator wordGenerator("!Kasia  123 Gosia?");

@@ -29,6 +29,32 @@ public:
 };
 
 
+TEST_F(gameWithGosia, whenUserInputIsEscThenGameStateIsLoose)
+{
+    char esc = 27;
+    std::string escString = "";
+    escString.push_back(esc);
+    updateIss(escString);
+    Game game(std::move(wordPtr)); 
+    game.setInput(iss);
+    game.playGame();
+    State result = game.getState();
+    EXPECT_EQ(result, loose);
+}
+
+TEST_F(gameWithGosia, whenUserInputIsGosEscThenGameStateIsLoose)
+{
+    char esc = 27;
+    std::string escString = "Gos";
+    escString.push_back(esc);
+    updateIss(escString);
+    Game game(std::move(wordPtr)); 
+    game.setInput(iss);
+    game.playGame();
+    State result = game.getState();
+    EXPECT_EQ(result, loose);
+}
+
 TEST_F(gameWithGosia, whenUserInputIsGOSIAThenGameStateIsWon)
 {
     updateIss("GOSIA");
@@ -182,19 +208,6 @@ TEST_F(gameWithA, whenGameIsCreatedStateIsOn)
     State result = game.getState();
     EXPECT_EQ(result, on);
 }
-
-/*//since setState() and setNumberofLifes is private, this test is obsolete because it will behave like whenUserInputIsRychuThenGameStateIsLoose 
-TEST_F(gameWithA, whenNumberOfLifesIs0ThenGameIsLoose) 
-{
-    std::istringstream iss("b");
-    Game game(std::move(wordPtr));
-    game.setInput(iss);
-    game.playRound(); //need to play 5 rounds like in whenUserInputIsRychuThenGameStateIsLoose
-    unsigned result1 = game.getNumberOfLifes();
-    State result2 = game.getState();
-    EXPECT_EQ(result1, 0);
-    EXPECT_EQ(result2, loose);
-}*/
 
 TEST_F(gameWithA, whenGameIsStartedthenNumberOfLifeIs5)
 {

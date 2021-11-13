@@ -13,6 +13,7 @@ std::string WordGenerator::getLongWord(unsigned input)
     }
 
     if (word.size()<input)
+    //    return "NoMoreWordsMatchesCriteria";
         return "";
     else
         return word;
